@@ -22,6 +22,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::resource('carrito', CarritoController::class);
+Route::resource('carritos', CarritoController::class);
 
 require __DIR__.'/auth.php';

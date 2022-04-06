@@ -15,7 +15,11 @@ class CarritoController extends Controller
      */
     public function index()
     {
-        //
+        $carritos = Carrito::all();
+
+        return view('carritos.index', [
+            'carritos' => $carritos,
+        ]);
     }
 
     /**

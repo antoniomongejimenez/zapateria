@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('zapatos', function (Blueprint $table) {
             $table->id();
-            $table->integer('codigo')->unique();
+            $table->bigInteger('codigo')->unique();
             $table->string('denominacion');
             $table->decimal('precio', 6, 2);
             $table->timestamps();
