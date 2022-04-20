@@ -87,4 +87,9 @@ class CarritoController extends Controller
     {
         //
     }
+
+    public function meter()
+    {
+
+    }
 }

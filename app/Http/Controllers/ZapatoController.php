@@ -15,7 +15,11 @@ class ZapatoController extends Controller
      */
     public function index()
     {
-        //
+        $zapatos = Zapato::all();
+
+        return view('zapatos.index', [
+            'zapatos' => $zapatos,
+        ]);
     }
 
     /**
