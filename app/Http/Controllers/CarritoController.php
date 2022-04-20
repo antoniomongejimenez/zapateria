@@ -88,8 +88,12 @@ class CarritoController extends Controller
         //
     }
 
-    public function meter()
+    public function meter($zapato)
     {
+        $carritos = $zapato;
 
+        return view('carritos.meter', [
+            'carritos' => $carritos,
+        ]);
     }
 }
