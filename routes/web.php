@@ -30,6 +30,6 @@ Route::post('/carritos/meter/{zapato}', [CarritoController::class, 'meter'])
 ->middleware(['auth'])->name('carrito.meter');
 
 
-Route::get('/zapatos', [ZapatoController::class, 'index']);
+Route::get('/zapatos', [ZapatoController::class, 'index'])->name('zapatos');
 
 require __DIR__.'/auth.php';

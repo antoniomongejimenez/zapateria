@@ -17,4 +17,5 @@
             @endforeach
         </tbody>
     </table>
+    <a href="/dashboard" class="mt-4 text-blue-900 hover:underline">Volver</a>
 </x-carritos>

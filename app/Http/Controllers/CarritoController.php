@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCarritoRequest;
 use App\Http\Requests\UpdateCarritoRequest;
 use App\Models\Carrito;
+use App\Models\Zapato;
+use Illuminate\Support\Facades\Auth;
 
 class CarritoController extends Controller
 {
@@ -18,7 +20,7 @@ class CarritoController extends Controller
         $carritos = Carrito::all();
 
         return view('carritos.index', [
-            'carritos' => $carritos->where('id', '=', auth()->user()->id),
+            'carritos' => $carritos->where('user_id', '=', auth()->user()->id),
         ]);
     }
 
@@ -88,12 +90,24 @@ class CarritoController extends Controller
         //
     }
 
-    public function meter($zapato)
+    public function meter( Zapato $zapato)
     {
-        $carritos = $zapato;
+        $carrito = $carrito = Carrito::where('zapato_id', $zapato->id)->where('user_id', 1)->get();
 
-        return view('carritos.meter', [
-            'carritos' => $carritos,
-        ]);
+        if ($carrito->isEmpty()) {
+            $carrito = new Carrito();
+            $carrito->user_id = Auth::user()->id;
+            $carrito->zapato_id = $zapato->id;
+            $carrito->cantidad = 1;
+            $carrito->save();
+
+            return redirect()->route('zapatos')->with('success', 'Zapato anadido al carrito.');
+
+        }
+
+        $carrito[0]->cantidad +=1;
+        $carrito[0]->save();
+
+        return redirect()->route('zapatos')->with('success', 'Zapato anadido al carrito.');
     }
 }

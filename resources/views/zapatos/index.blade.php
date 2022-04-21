@@ -1,6 +1,10 @@
 <x-zapatos>
+
     <table class="table-auto">
         <thead>
+            <th class="px-6 py-2 text-gray-500">
+                Código
+            </th>
             <th class="px-6 py-2 text-gray-500">
                 Zapato
             </th>
@@ -15,6 +19,7 @@
         <tbody>
             @foreach ($zapatos as $zapato)
                 <tr>
+                    <td class="px-6 py-2">{{ $zapato->codigo}}</td>
                     <td class="px-6 py-2">{{ $zapato->denominacion}}</td>
                     <td class="px-6 py-2">{{ $zapato->precio }}</td>
                     <td class="px-6 py-2">
@@ -30,4 +35,5 @@
             @endforeach
         </tbody>
     </table>
+    <a href="/dashboard" class="mt-4 text-blue-900 hover:underline">Volver</a>
 </x-zapatos>
