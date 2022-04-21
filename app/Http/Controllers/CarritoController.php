@@ -24,75 +24,50 @@ class CarritoController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function sumar(Zapato $zapato)
     {
-        //
+        $carrito = $carrito = Carrito::where('zapato_id', $zapato->id)->where('user_id', auth()->user()->id)->get();
+
+        $carrito[0]->cantidad +=1;
+        $carrito[0]->save();
+
+        return redirect()->route('carrito')->with('success', 'Zapato sumado al carrito.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreCarritoRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreCarritoRequest $request)
+    public function restar(Zapato $zapato)
     {
-        //
+        $carrito = $carrito = Carrito::where('zapato_id', $zapato->id)->where('user_id', auth()->user()->id)->get();
+
+        if ($carrito[0]->cantidad === 1) {
+            $carrito[0]->delete();
+
+            return redirect()->route('carrito')->with('success', 'Zapato eliminado del carrito.');
+        }
+
+        $carrito[0]->cantidad -=1;
+        $carrito[0]->save();
+
+        return redirect()->route('carrito')->with('success', 'Zapato restado del carrito.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Carrito  $carrito
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Carrito $carrito)
+    public function vaciar(Carrito $carrito)
     {
-        //
-    }
+        $carrito = $carrito = Carrito::where('user_id', auth()->user()->id)->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Carrito  $carrito
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Carrito $carrito)
-    {
-        //
-    }
+            foreach ($carrito as $linea) {
+                $linea->delete();
+            }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCarritoRequest  $request
-     * @param  \App\Models\Carrito  $carrito
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCarritoRequest $request, Carrito $carrito)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Carrito  $carrito
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Carrito $carrito)
-    {
-        //
+
+            return redirect()->route('carrito')->with('success', 'Carrito vaciado.');
+
     }
 
     public function meter( Zapato $zapato)
     {
-        $carrito = $carrito = Carrito::where('zapato_id', $zapato->id)->where('user_id', 1)->get();
+        $carrito = $carrito = Carrito::where('zapato_id', $zapato->id)->where('user_id', auth()->user()->id)->get();
 
         if ($carrito->isEmpty()) {
             $carrito = new Carrito();
