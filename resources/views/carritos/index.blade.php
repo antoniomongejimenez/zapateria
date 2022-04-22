@@ -30,7 +30,7 @@
                                 <form action="{{route('carrito.sumar', $carrito->zapato)}}" method="post">
                                     @csrf
                                     @method('POST')
-                                    <button class="inline-flex bg-green-600 text-white rounded-full h-6 px-3 justify-center items-center text-" type="submit">+</button>
+                                    <button class="inline-flex text-black h-6 px-3 justify-center items-center" type="submit">+</button>
                                 </form>
                             </div>
 
@@ -38,7 +38,7 @@
                                 <form action="{{route('carrito.restar', $carrito->zapato)}}" method="post">
                                     @csrf
                                     @method('POST')
-                                    <button class="inline-flex bg-red-600 text-white rounded-full h-6 px-3 justify-center items-center text-" type="submit"> - </button>
+                                    <button class="inline-flex text-black h-6 px-3 justify-center items-center" type="submit"> - </button>
                                 </form>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
         <form action="{{route('carrito.vaciar', $carrito)}}" method="post">
             @csrf
             @method('POST')
-            <button class="inline-flex bg-red-600 text-white rounded-full h-6 px-3 justify-center items-center text-" type="submit"> Vaciar </button>
+            <button class="inline-flex bg-red-500 text-black h-6 px-3 justify-center items-center" type="submit"> Vaciar</button>
         </form>
     </div>
     <a href="/dashboard" class="mt-4 text-blue-900 hover:underline">Volver</a>

@@ -51,15 +51,11 @@ class CarritoController extends Controller
         return redirect()->route('carrito')->with('success', 'Zapato restado del carrito.');
     }
 
-    public function vaciar(Carrito $carrito)
+    public function vaciar()
     {
         $carrito = $carrito = Carrito::where('user_id', auth()->user()->id)->get();
 
-            foreach ($carrito as $linea) {
-                $linea->delete();
-            }
-
-
+            $carrito->delete();
 
             return redirect()->route('carrito')->with('success', 'Carrito vaciado.');
 
