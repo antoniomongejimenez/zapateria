@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCarritoRequest;
 use App\Http\Requests\UpdateCarritoRequest;
 use App\Models\Carrito;
+use App\Models\Factura;
+use App\Models\Linea;
 use App\Models\Zapato;
 use Illuminate\Support\Facades\Auth;
 
@@ -84,5 +86,27 @@ class CarritoController extends Controller
         $carrito[0]->save();
 
         return redirect()->route('zapatos')->with('success', 'Zapato anadido al carrito.');
+    }
+
+    public function facturar(Factura $factura, Linea $linea ) {
+
+        $factura_nueva = new Factura();
+        $factura_nueva->user_id = Auth::user()->id;
+        $factura_nueva->save();
+
+        $carrito = Carrito::where('user_id', auth()->user()->id)->get();
+
+        foreach ($carrito as $lineacarrito) {
+            $linea_nueva = new Linea();
+            $linea_nueva->factura_id = $factura_nueva->id;
+            $linea_nueva->zapato_id = $lineacarrito->zapato_id;
+            $linea_nueva->cantidad = $lineacarrito->cantidad;
+            $linea_nueva->save();
+        }
+
+        $carrito->each->delete();
+
+        return redirect()->route('carrito')->with('success', 'Pedido realizado.');
+
     }
 }

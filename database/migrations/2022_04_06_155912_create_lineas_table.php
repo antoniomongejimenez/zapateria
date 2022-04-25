@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('lineas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('factura_id')->constrained('facturas');
             $table->foreignId('zapato_id')->constrained('zapatos');
+            $table->integer('cantidad');
             $table->timestamps();
         });
     }

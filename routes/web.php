@@ -38,6 +38,9 @@ Route::post('/carritos/sumar/{zapato}', [CarritoController::class, 'sumar'])
 Route::post('/carritos/vaciar', [CarritoController::class, 'vaciar'])
 ->middleware(['auth'])->name('carrito.vaciar');
 
+Route::post('/carritos/facturar', [CarritoController::class, 'facturar'])
+->middleware(['auth'])->name('carrito.facturar');
+
 
 Route::get('/zapatos', [ZapatoController::class, 'index'])->name('zapatos');
 

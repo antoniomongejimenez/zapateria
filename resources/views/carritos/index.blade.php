@@ -48,6 +48,13 @@
         </tbody>
     </table>
     <div>
+        <form action="{{route('carrito.facturar')}}" method="post">
+            @csrf
+            @method('POST')
+            <button class="inline-flex bg-green-500 text-black h-6 px-3 justify-center items-center" type="submit"> Realizar pedido</button>
+        </form>
+    </div>
+    <div class="mt-5">
         <form action="{{route('carrito.vaciar')}}" method="post">
             @csrf
             @method('POST')
