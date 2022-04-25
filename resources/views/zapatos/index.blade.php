@@ -35,5 +35,6 @@
             @endforeach
         </tbody>
     </table>
+    <a href="/carritos" class="mt-4 text-blue-900 hover:underline">Carrito</a>
     <a href="/dashboard" class="mt-4 text-blue-900 hover:underline">Volver</a>
 </x-zapatos>

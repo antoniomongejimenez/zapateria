@@ -27,7 +27,7 @@ class CarritoController extends Controller
 
     public function sumar(Zapato $zapato)
     {
-        $carrito = $carrito = Carrito::where('zapato_id', $zapato->id)->where('user_id', auth()->user()->id)->get();
+        $carrito = Carrito::where('zapato_id', $zapato->id)->where('user_id', auth()->user()->id)->get();
 
         $carrito[0]->cantidad +=1;
         $carrito[0]->save();
@@ -37,7 +37,7 @@ class CarritoController extends Controller
 
     public function restar(Zapato $zapato)
     {
-        $carrito = $carrito = Carrito::where('zapato_id', $zapato->id)->where('user_id', auth()->user()->id)->get();
+        $carrito = Carrito::where('zapato_id', $zapato->id)->where('user_id', auth()->user()->id)->get();
 
         if ($carrito[0]->cantidad === 1) {
             $carrito[0]->delete();
@@ -53,11 +53,15 @@ class CarritoController extends Controller
 
     public function vaciar()
     {
-        $carrito = $carrito = Carrito::where('user_id', auth()->user()->id)->get();
+        $carrito = Carrito::where('user_id', auth()->user()->id)->get();
 
-            $carrito->delete();
+        if ($carrito->isEmpty()) {
+            return redirect()->route('carrito')->with('error', 'El carrito esta vacio.');
+        }
 
-            return redirect()->route('carrito')->with('success', 'Carrito vaciado.');
+        $carrito->each->delete();
+
+        return redirect()->route('carrito')->with('success', 'Carrito vaciado.');
 
     }
 

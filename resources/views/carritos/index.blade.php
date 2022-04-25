@@ -48,10 +48,10 @@
         </tbody>
     </table>
     <div>
-        <form action="{{route('carrito.vaciar', $carrito)}}" method="post">
+        <form action="{{route('carrito.vaciar')}}" method="post">
             @csrf
             @method('POST')
-            <button class="inline-flex bg-red-500 text-black h-6 px-3 justify-center items-center" type="submit"> Vaciar</button>
+            <button class="inline-flex bg-red-500 text-black h-6 px-3 justify-center items-center" type="submit"> Vaciar carrito</button>
         </form>
     </div>
     <a href="/dashboard" class="mt-4 text-blue-900 hover:underline">Volver</a>
